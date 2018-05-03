@@ -1,0 +1,22 @@
+---
+#
+# Source: https://taymor.io/posts/deploying-a-blog-with-hugo-travis-and-gae/
+#
+
+runtime: python27 # you don't care what the runtime is for static files. Python27 was easy
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /$
+  static_files: public/index.html
+  upload: public/index.html
+- url: /posts # serve the list of posts
+  static_files: public/posts/index.html
+  upload: public/posts/index.html
+- url: /posts/(.*)/ # serve each post
+  static_files: public/posts/\1/index.html
+  upload: public/posts/(.*)
+- url: /(.*) # serve my css
+  static_files: public/\1
+  upload: public/(.*)
